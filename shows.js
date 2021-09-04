@@ -33,7 +33,7 @@ function upload() {
 
 let path = window.location.pathname;
 path = path.substring(1, path.length - 5);
-// console.log(path);
+console.log(path);
 let watchHistory = undefined;
 switch(path)  {
     case 'shows':
@@ -47,6 +47,5 @@ switch(path)  {
 }  
 
 console.log(watchHistory)
-
 
 
