@@ -32,7 +32,7 @@ function upload() {
 }
 
 let path = window.location.pathname;
-path = path.substring(1, path.length - 5);
+path = path.substring(1, path.length - 5).split('/')[1];
 console.log(path);
 let watchHistory = undefined;
 switch(path)  {
