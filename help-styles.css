@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+
+:root {
+  --accent-clr: #e50914;
+  --white: gainsboro;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: black;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  animation-duration: 1s;
+  animation-name: fade-in;
+}
+
+header {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 0.2rem;
+  height: 10rem;
+  padding-bottom: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 7rem;
+  height: 7rem;
+  color: var(--accent-clr);
+}
+
+h2 {
+  font-size: 3rem;
+  color: var(--white);
+}
+
+a {
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.5rem;
+  color: var(--accent-clr);
+}
+
+.infoboxes {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+.infobox {
+  width: 90vw;
+  text-align: center;
+}
+
+.infobox > .title {
+  position: relative;
+  left: 50%;
+  top: 0vh;
+  transform: translate(-50%, 0%);
+  background-color: var(--accent-clr);
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: gainsboro;
+
+  width: fit-content;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--accent-clr);
+  padding: 0.5rem 1.5rem;
+  z-index: 1;
+}
+
+.infobox > .item {
+  position: relative;
+  left: 50%;
+  top: -1.2rem;
+  transform: translate(-50%, 0%);
+
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: gainsboro;
+
+  border-radius: 0.1rem;
+  border: 1px solid white;
+  padding: 1rem 1rem;
+  padding-top: 2rem;
+  max-width: 20rem;
+}
+
+footer {
+  width: 90vw;
+  height: max-content;
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: var(--white);
+  background-color: transparent;
+  text-align: center;
+  padding: 1vh 1vw;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
