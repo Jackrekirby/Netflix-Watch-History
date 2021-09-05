@@ -14,6 +14,24 @@ class switchList {
     }
 }
 
+class Pages {
+    constructor(pageIds) {
+        this.pageIds = pageIds;
+        this.currentPageId = pageIds[0];
+    }
+
+    goto(pageId) {
+        this.hide(this.currentPageId, true);
+        this.hide(pageId, false);
+        this.currentPageId = pageId;
+    }
+
+    hide(pageId, state) {
+        let element = document.getElementById(pageId);
+        state ? element.classList.add('hidden') : element.classList.remove('hidden');
+    }
+}
+
 class WatchHistory {
 
     constructor() {
@@ -47,5 +65,7 @@ switch(path)  {
 }  
 
 console.log(watchHistory)
+
+let pages = new Pages(['home', 'help', 'data']);
 
 

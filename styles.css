@@ -11,8 +11,18 @@
   padding: 0px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 body {
   background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+#home {
+  background-color: transparent;
   overflow: auto;
   width: 100%;
   height: 100%;
@@ -22,11 +32,12 @@ body {
   justify-content: space-between;
   align-items: center;
   align-content: center;
+
   animation-duration: 1s;
   animation-name: fade-in;
 }
 
-.middle {
+#home .middle {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +45,7 @@ body {
   align-items: center;
 }
 
-header {
+#home header {
   font-family: "Bebas Neue", cursive;
   letter-spacing: 0.2rem;
   height: 10rem;
@@ -47,18 +58,18 @@ header {
   align-items: center;
 }
 
-h1 {
+#home h1 {
   font-size: 7rem;
   height: 7rem;
   color: var(--accent-clr);
 }
 
-h2 {
+#home h2 {
   font-size: 3rem;
   color: var(--white);
 }
 
-.row {
+#home .row {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -66,11 +77,11 @@ h2 {
   align-items: center;
 }
 
-input[type="file"] {
+#home input[type="file"] {
   display: none;
 }
 
-.btn {
+#home .btn {
   width: 6rem;
   text-align: center;
   font-size: 1rem;
@@ -84,28 +95,412 @@ input[type="file"] {
   color: var(--white);
 }
 
-.primary-btn {
+#home .primary-btn {
   border-color: var(--accent-clr);
   background-color: var(--accent-clr);
 }
 
-.primary-btn:active {
+#home .primary-btn:active {
   background-color: transparent;
 }
 
-.secondary-btn {
+#home .secondary-btn {
   border-color: var(--white);
   background-color: transparent;
   text-decoration: none;
   color: var(--white);
 }
 
-.secondary-btn:active {
+#home .secondary-btn:active {
   background-color: var(--white);
   color: black;
 }
 
-footer {
+#home footer {
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: var(--white);
+  background-color: transparent;
+  text-align: center;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+
+#help {
+  background-color: transparent;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  animation-duration: 1s;
+  animation-name: fade-in;
+}
+
+#help .flex-even {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 1;
+}
+
+#help header {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 0.2rem;
+  height: 8rem;
+  padding-top: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#help h1 {
+  font-size: 6rem;
+  height: 4.5rem;
+  line-height: 5rem;
+  color: var(--accent-clr);
+}
+
+#help h2 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  color: var(--white);
+}
+
+#help a,
+#help .page-link {
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.5rem;
+  color: var(--accent-clr);
+  text-decoration: underline;
+}
+
+#help .infoboxes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+#help .infobox {
+  width: 90%;
+  text-align: center;
+}
+
+#help .infobox > .title {
+  position: relative;
+  left: 50%;
+  top: 0vh;
+  transform: translate(-50%, 0%);
+  background-color: var(--accent-clr);
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: gainsboro;
+
+  width: fit-content;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--accent-clr);
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+
+#help .infobox > .item {
+  position: relative;
+  left: 50%;
+  top: -1.2rem;
+  transform: translate(-50%, 0%);
+
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: gainsboro;
+
+  border-radius: 0.1rem;
+  border: 1px solid white;
+  padding: 1.5rem 1rem 1rem 1rem;
+  max-width: 20rem;
+}
+
+#help footer {
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: var(--white);
+  background-color: transparent;
+  text-align: center;
+  padding: 0rem 1rem 0.5rem 1rem;
+}
+
+#data {
+  background-color: black;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  animation-duration: 1s;
+  animation-name: fade-in;
+}
+
+#data header {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 0.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+#data h1 {
+  font-size: 6rem;
+  color: var(--accent-clr);
+}
+
+#data h2 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  color: var(--white);
+}
+
+@media screen and (orientation: portrait) {
+  #data header {
+    flex-direction: column;
+    height: 8rem;
+    padding-top: 0.5rem;
+  }
+
+  #data h1 {
+    height: 4.5rem;
+    line-height: 5rem;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #data header {
+    flex-direction: row;
+    height: 4.5rem;
+    line-height: 5rem;
+    padding-top: 0.5rem;
+  }
+
+  #data h1 {
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+  }
+}
+
+#data a {
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.5rem;
+  color: var(--accent-clr);
+}
+
+#data .shows {
+  width: 90%;
+  max-width: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  border: 1px solid var(--white);
+  border-left: 0px;
+  border-right: 0px;
+  list-style-type: none;
+}
+
+#data .shows > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  color: var(--white);
+  width: 90%;
+  height: 2rem;
+}
+
+#data .shows > li > * {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  height: min-content;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+#data .shows > li > h1 {
+  text-align: left;
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+#data .shows > li > h2 {
+  text-align: right;
+  color: var(--white);
+}
+
+#data .shows > li:nth-child(odd) > * {
+  color: var(--accent-clr);
+}
+
+#data .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+#data p {
+  color: white;
+  font-family: "Sora", sans-serif;
+  text-align: center;
+}
+
+#data .row > * {
+  color: white;
+  font-family: "Sora", sans-serif;
+  text-align: center;
+  width: max-content;
+  margin: 0rem 1rem;
+  border-radius: 0.1rem;
+  border: 1px solid var(--accent-clr);
+  background-color: var(--accent-clr);
+  padding: 0.5rem 1.5rem;
+  opacity: 0.2;
+}
+
+#data .row > .middle {
+  border-color: var(--white);
+  background-color: transparent;
+  opacity: 1;
+}
+
+#data .option-box {
+  display: flex;
+
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-family: "Sora", sans-serif;
+  margin: 0.5rem 0rem;
+}
+
+#data .option-boxes {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+@media screen and (orientation: portrait) {
+  #data .option-boxes {
+    flex-direction: column;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #data .option-boxes {
+    flex-direction: row;
+  }
+}
+
+#data .option-box > .title {
+  padding-right: 1rem;
+  border: 1px solid var(--white);
+  background-color: transparent;
+  border-top-left-radius: 0.1rem;
+  border-bottom-left-radius: 0.1rem;
+  padding: 0.5rem 0.8rem;
+  width: 4rem;
+}
+
+#data .option-box > .item {
+  color: black;
+  background-color: var(--white);
+  border: 1px solid var(--white);
+  border-top-right-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
+  border-left-width: 0px;
+  padding: 0.5rem 1rem;
+  width: 7rem;
+}
+
+#data .option-box > .order {
+  border: 1px solid var(--white);
+  color: var(--white);
+  border-radius: 0.1rem;
+  margin-left: 0.5rem;
+  padding: 0.5rem 0.2rem;
+}
+
+@media screen and (orientation: portrait) {
+  #data .option-box > .order-offset {
+    color: black;
+    border: 1px solid black;
+    border-radius: 0.1rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 0.2rem;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #data .option-box > .order-offset {
+    display: none;
+  }
+
+  #view-state {
+    margin-right: 0.5rem;
+  }
+}
+
+#data .option-box.red > .item {
+  background-color: var(--accent-clr);
+  border-color: var(--accent-clr);
+}
+
+#data .option-box.red > .title {
+  border-color: var(--accent-clr);
+}
+
+#data .option-box.red > .item:active {
+  background-color: transparent;
+  color: var(--white);
+}
+
+#data .option-box > .item:active {
+  background-color: transparent;
+  color: var(--white);
+}
+
+#data .option-box > .order:active {
+  background-color: var(--white);
+  color: black;
+}
+
+#data footer {
   font-family: "Sora", sans-serif;
   font-size: 0.8rem;
   font-weight: 200;

@@ -7,23 +7,276 @@
     <title>Netflix Watch History</title>
   </head>
   <body>
-    <div></div>
-    <div class="middle">
-      <header>
+    <div id="home">
+      <div></div>
+      <div class="middle">
+        <header>
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="row">
+          <label class="btn primary-btn" for="file-upload">Upload</label>
+          <input id="file-upload" type="file" />
+          <div class="btn secondary-btn" onclick="pages.goto('help')">Help</div>
+        </div>
+      </div>
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="help" class="hidden">
+      <div class="flex-even">
+        <header onclick="pages.goto('home')">
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="infoboxes">
+          <div class="infobox about">
+            <div class="title">About</div>
+            <div class="item">
+              This website creates a list of films and series of your Netflix
+              watch history.
+            </div>
+          </div>
+
+          <div class="infobox find-history">
+            <div class="title">Where is my watch history?</div>
+            <div class="item">
+              For the latest guide, go to the<br />
+              <a href="https://help.netflix.com/en/node/101917" target="_blank"
+                >Netflix Help Center</a
+              >
+            </div>
+          </div>
+
+          <div class="infobox start">
+            <div class="title">How do I start?</div>
+            <div class="item">
+              Upload your watch history on the<br />
+              <div class="page-link" onclick="pages.goto('home')">
+                home page
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="data" class="hidden">
+      <header onclick="pages.goto('home')">
         <h1>Netflix</h1>
         <h2>watch history</h2>
       </header>
 
-      <div class="row">
-        <label class="btn primary-btn" for="file-upload"> Upload </label>
-        <input id="file-upload" type="file" />
-        <a class="btn secondary-btn" href="help.html">Help</a>
+      <div class="option-boxes">
+        <div class="option-box red">
+          <div class="title">View:</div>
+          <div
+            id="view-state"
+            class="item"
+            onclick="watchHistory.views.next();"
+          >
+            TV Shows
+          </div>
+        </div>
+
+        <div class="option-box">
+          <div class="order-offset">▲</div>
+          <div class="title">Sort By:</div>
+          <div
+            id="sort-state"
+            class="item"
+            onclick="watchHistory.sorts.next();"
+          >
+            A-Z
+          </div>
+          <div
+            id="sort-direction-state"
+            class="order"
+            onclick="watchHistory.sortDirection.next();"
+          >
+            ▲
+          </div>
+        </div>
       </div>
+
+      <ol class="shows">
+        <li>
+          <h1>Friends</h1>
+          <h2>127</h2>
+        </li>
+        <li>
+          <h1>The Big Bang Theory</h1>
+          <h2>117</h2>
+        </li>
+        <li>
+          <h1>Jessica Jones</h1>
+          <h2>98</h2>
+        </li>
+        <li>
+          <h1>How I Met Your Mother</h1>
+          <h2>78</h2>
+        </li>
+        <li>
+          <h1>Zoo</h1>
+          <h2>67</h2>
+        </li>
+        <li>
+          <h1>Luke Cage</h1>
+          <h2>54</h2>
+        </li>
+        <li>
+          <h1>The Punisher</h1>
+          <h2>45</h2>
+        </li>
+        <li>
+          <h1>Prison Break</h1>
+          <h2>30</h2>
+        </li>
+        <li>
+          <h1>Falling Water</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Gogglebox</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Fresh Meat</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>The Leftovers</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Justified</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>24</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Garth Marenghi’s Darkplace</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>The Trip</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Broad City</h1>
+          <h2>6</h2>
+        </li>
+        <li>
+          <h1>The Shadow Line</h1>
+          <h2>5</h2>
+        </li>
+        <li>
+          <h1>The Mighty Boosh</h1>
+          <h2>2</h2>
+        </li>
+        <li>
+          <h1>Life on Mars</h1>
+          <h2>1</h2>
+        </li>
+        <li>
+          <h1>Friends</h1>
+          <h2>127</h2>
+        </li>
+        <li>
+          <h1>The Big Bang Theory</h1>
+          <h2>117</h2>
+        </li>
+        <li>
+          <h1>Jessica Jones</h1>
+          <h2>98</h2>
+        </li>
+        <li>
+          <h1>How I Met Your Mother</h1>
+          <h2>78</h2>
+        </li>
+        <li>
+          <h1>Zoo</h1>
+          <h2>67</h2>
+        </li>
+        <li>
+          <h1>Luke Cage</h1>
+          <h2>54</h2>
+        </li>
+        <li>
+          <h1>The Punisher</h1>
+          <h2>45</h2>
+        </li>
+        <li>
+          <h1>Prison Break</h1>
+          <h2>30</h2>
+        </li>
+        <li>
+          <h1>Falling Water</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Gogglebox</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Fresh Meat</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>The Leftovers</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Justified</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>24</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Garth Marenghi’s Darkplace</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>The Trip</h1>
+          <h2>17</h2>
+        </li>
+        <li>
+          <h1>Broad City</h1>
+          <h2>6</h2>
+        </li>
+        <li>
+          <h1>The Shadow Line</h1>
+          <h2>5</h2>
+        </li>
+        <li>
+          <h1>The Mighty Boosh</h1>
+          <h2>2</h2>
+        </li>
+        <li>
+          <h1>Life on Mars</h1>
+          <h2>1</h2>
+        </li>
+      </ol>
+
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
     </div>
-    <footer>
-      This website is not affiliated, authorized or in any way officially
-      connected with Netflix.
-    </footer>
-    <script src="shows.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
