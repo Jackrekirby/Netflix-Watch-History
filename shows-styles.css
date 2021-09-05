@@ -41,32 +41,37 @@ h1 {
   color: var(--accent-clr);
 }
 
+h2 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  color: var(--white);
+}
+
 @media screen and (orientation: portrait) {
   header {
     flex-direction: column;
     height: 8rem;
+    padding-top: 0.5rem;
   }
 
   h1 {
-    height: 6rem;
+    height: 4.5rem;
+    line-height: 5rem;
   }
 }
 
 @media screen and (orientation: landscape) {
   header {
     flex-direction: row;
-    height: 6rem;
+    height: 4.5rem;
+    line-height: 5rem;
+    padding-top: 0.5rem;
   }
 
   h1 {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     margin-top: 1rem;
   }
-}
-
-h2 {
-  font-size: 2.5rem;
-  color: var(--white);
 }
 
 a {
@@ -97,6 +102,7 @@ a {
   align-content: center;
   color: var(--white);
   width: 90%;
+  height: 2rem;
 }
 
 .shows > li > * {
