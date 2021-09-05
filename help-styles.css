@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
 
 :root {
   --accent-clr: #e50914;
@@ -15,8 +14,8 @@
 body {
   background-color: black;
   overflow: auto;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -57,7 +56,7 @@ a {
 }
 
 .infoboxes {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -66,7 +65,7 @@ a {
 }
 
 .infobox {
-  width: 90vw;
+  width: 90%;
   text-align: center;
 }
 
@@ -85,7 +84,7 @@ a {
 
   border-radius: 0.1rem;
   border: 1px solid var(--accent-clr);
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1rem;
   z-index: 1;
 }
 
@@ -109,15 +108,13 @@ a {
 }
 
 footer {
-  width: 90vw;
-  height: max-content;
   font-family: "Sora", sans-serif;
   font-size: 0.8rem;
   font-weight: 200;
   color: var(--white);
   background-color: transparent;
   text-align: center;
-  padding: 1vh 1vw;
+  padding: 1rem 1rem 0.5rem 1rem;
 }
 
 @keyframes fade-in {
