@@ -17,7 +17,7 @@
 
         <div class="row">
           <label class="btn primary-btn" for="file-upload">Upload</label>
-          <input id="file-upload" type="file" />
+          <input id="file-upload" type="file" accept=".csv" />
           <div class="btn secondary-btn" onclick="pages.goto('help')">Help</div>
         </div>
       </div>
@@ -83,7 +83,7 @@
           <div
             id="view-state"
             class="item"
-            onclick="watchHistory.views.next();"
+            onclick="watchHistory.switchOption('view');"
           >
             TV Shows
           </div>
@@ -95,182 +95,21 @@
           <div
             id="sort-state"
             class="item"
-            onclick="watchHistory.sorts.next();"
+            onclick="watchHistory.switchOption('sort by');"
           >
-            A-Z
+            Last Viewed
           </div>
           <div
             id="sort-direction-state"
             class="order"
-            onclick="watchHistory.sortDirection.next();"
+            onclick="watchHistory.switchOption('sort direction');"
           >
-            ▲
+            ▼
           </div>
         </div>
       </div>
 
-      <ol class="shows">
-        <li>
-          <h1>Friends</h1>
-          <h2>127</h2>
-        </li>
-        <li>
-          <h1>The Big Bang Theory</h1>
-          <h2>117</h2>
-        </li>
-        <li>
-          <h1>Jessica Jones</h1>
-          <h2>98</h2>
-        </li>
-        <li>
-          <h1>How I Met Your Mother</h1>
-          <h2>78</h2>
-        </li>
-        <li>
-          <h1>Zoo</h1>
-          <h2>67</h2>
-        </li>
-        <li>
-          <h1>Luke Cage</h1>
-          <h2>54</h2>
-        </li>
-        <li>
-          <h1>The Punisher</h1>
-          <h2>45</h2>
-        </li>
-        <li>
-          <h1>Prison Break</h1>
-          <h2>30</h2>
-        </li>
-        <li>
-          <h1>Falling Water</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Gogglebox</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Fresh Meat</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>The Leftovers</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Justified</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>24</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Garth Marenghi’s Darkplace</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>The Trip</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Broad City</h1>
-          <h2>6</h2>
-        </li>
-        <li>
-          <h1>The Shadow Line</h1>
-          <h2>5</h2>
-        </li>
-        <li>
-          <h1>The Mighty Boosh</h1>
-          <h2>2</h2>
-        </li>
-        <li>
-          <h1>Life on Mars</h1>
-          <h2>1</h2>
-        </li>
-        <li>
-          <h1>Friends</h1>
-          <h2>127</h2>
-        </li>
-        <li>
-          <h1>The Big Bang Theory</h1>
-          <h2>117</h2>
-        </li>
-        <li>
-          <h1>Jessica Jones</h1>
-          <h2>98</h2>
-        </li>
-        <li>
-          <h1>How I Met Your Mother</h1>
-          <h2>78</h2>
-        </li>
-        <li>
-          <h1>Zoo</h1>
-          <h2>67</h2>
-        </li>
-        <li>
-          <h1>Luke Cage</h1>
-          <h2>54</h2>
-        </li>
-        <li>
-          <h1>The Punisher</h1>
-          <h2>45</h2>
-        </li>
-        <li>
-          <h1>Prison Break</h1>
-          <h2>30</h2>
-        </li>
-        <li>
-          <h1>Falling Water</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Gogglebox</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Fresh Meat</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>The Leftovers</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Justified</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>24</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Garth Marenghi’s Darkplace</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>The Trip</h1>
-          <h2>17</h2>
-        </li>
-        <li>
-          <h1>Broad City</h1>
-          <h2>6</h2>
-        </li>
-        <li>
-          <h1>The Shadow Line</h1>
-          <h2>5</h2>
-        </li>
-        <li>
-          <h1>The Mighty Boosh</h1>
-          <h2>2</h2>
-        </li>
-        <li>
-          <h1>Life on Mars</h1>
-          <h2>1</h2>
-        </li>
-      </ol>
+      <div id="shows-list"></div>
 
       <footer>
         This website is not affiliated, authorized or in any way officially

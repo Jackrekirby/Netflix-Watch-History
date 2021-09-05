@@ -314,21 +314,20 @@ body {
   color: var(--accent-clr);
 }
 
-#data .shows {
+#shows-list {
   width: 90%;
   max-width: 35rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   align-content: center;
   border: 1px solid var(--white);
   border-left: 0px;
   border-right: 0px;
-  list-style-type: none;
 }
 
-#data .shows > li {
+#shows-list > .item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -336,39 +335,29 @@ body {
   align-content: center;
   color: var(--white);
   width: 90%;
-  height: 2rem;
+  padding: 0.2rem 0rem;
 }
 
-#data .shows > li > * {
+#shows-list > .item > * {
   font-family: "Sora", sans-serif;
   font-size: 1rem;
-  height: min-content;
   font-weight: 600;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
 }
 
-#data .shows > li > h1 {
+#shows-list > .item > name {
   text-align: left;
   color: var(--white);
-  overflow-x: hidden;
+  border: 1px white solid;
 }
 
-#data .shows > li > h2 {
+#shows-list > .item > value {
   text-align: right;
   color: var(--white);
+  border: 1px white solid;
 }
 
-#data .shows > li:nth-child(odd) > * {
+#shows-list > .item:nth-child(odd) > * {
   color: var(--accent-clr);
-}
-
-#data .row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
 }
 
 #data p {
