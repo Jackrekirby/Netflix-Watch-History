@@ -37,25 +37,25 @@ header {
 }
 
 h1 {
-  font-size: 7rem;
+  font-size: 6rem;
   color: var(--accent-clr);
 }
 
 @media screen and (orientation: portrait) {
   header {
     flex-direction: column;
-    height: 10rem;
+    height: 8rem;
   }
 
   h1 {
-    height: 7rem;
+    height: 6rem;
   }
 }
 
 @media screen and (orientation: landscape) {
   header {
     flex-direction: row;
-    height: 8rem;
+    height: 6rem;
   }
 
   h1 {
@@ -65,7 +65,7 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--white);
 }
 
@@ -192,7 +192,7 @@ p {
   background-color: transparent;
   border-top-left-radius: 0.1rem;
   border-bottom-left-radius: 0.1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   width: 4rem;
 }
 
@@ -211,16 +211,28 @@ p {
   border: 1px solid var(--white);
   color: var(--white);
   border-radius: 0.1rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   padding: 0.5rem 0.2rem;
 }
 
-.option-box > .order-offset {
-  color: black;
-  border: 1px solid black;
-  border-radius: 0.1rem;
-  margin-right: 1rem;
-  padding: 0.5rem 0.2rem;
+@media screen and (orientation: portrait) {
+  .option-box > .order-offset {
+    color: black;
+    border: 1px solid black;
+    border-radius: 0.1rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 0.2rem;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .option-box > .order-offset {
+    display: none;
+  }
+
+  #view-state {
+    margin-right: 0.5rem;
+  }
 }
 
 .option-box.red > .item {
