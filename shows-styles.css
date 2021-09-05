@@ -77,6 +77,7 @@ a {
 
 .shows {
   width: 90%;
+  max-width: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
