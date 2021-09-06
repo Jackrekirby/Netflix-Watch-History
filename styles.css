@@ -395,6 +395,31 @@ body {
   align-items: center;
 }
 
+#data .btn-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  width: 90%;
+  max-width: 35rem;
+}
+
+#data .btn {
+  color: white;
+  font-family: "Sora", sans-serif;
+  text-align: center;
+  border: 1px solid var(--white);
+  width: 5rem;
+  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 0.5rem;
+}
+
+#data .btn.red {
+  border-color: var(--accent-clr);
+  background-color: var(--accent-clr);
+}
+
 @media screen and (orientation: portrait) {
   #data .option-boxes {
     flex-direction: column;
@@ -779,6 +804,46 @@ body {
   color: var(--white);
 }
 
+#save .option {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 0.25rem 0rem 0.25rem 0rem;
+}
+
+#save .option-name {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8rem;
+  text-align: left;
+}
+
+#save .checkbox {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--white);
+  background-color: transparent;
+}
+
+#save .option:nth-child(even) > * {
+  color: var(--accent-clr);
+  border-color: var(--accent-clr);
+}
+
+#save .checkbox.off {
+  color: transparent;
+}
+
 #save .stat-name {
   text-align: left;
 }
@@ -789,22 +854,6 @@ body {
 
 #save .stat:nth-child(even) {
   color: var(--accent-clr);
-}
-
-#save .icon-row {
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-  align-items: center;
-
-  width: 100%;
-  padding: 0.25rem 0rem 0.25rem 0rem;
-}
-
-#save .icon {
-  --length: 2.5rem;
-  width: var(--length);
-  height: var(--length);
 }
 
 #save .infoboxes {
@@ -857,9 +906,15 @@ body {
   border: 1px solid white;
   padding: 1.5rem 1rem 1rem 1rem;
   max-width: 20rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
 }
 
-#save .return-button {
+#download-button {
   background-color: var(--accent-clr);
   font-family: "Sora", sans-serif;
   font-size: 1rem;
@@ -871,7 +926,232 @@ body {
   border-radius: 0.1rem;
   border: 1px solid var(--accent-clr);
   padding: 0.5rem 1rem;
+  margin: 0.5rem 0rem;
+}
+
+#save .return-button {
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: gainsboro;
+
+  width: fit-content;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--white);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0rem;
+}
+
+#stats {
+  background-color: transparent;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  animation-duration: 1s;
+  animation-name: fade-in;
+}
+
+#stats header {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 0.2rem;
+  height: 8rem;
+  padding-top: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#stats h1 {
+  font-size: 6rem;
+  height: 4.5rem;
+  line-height: 5rem;
+  color: var(--accent-clr);
+}
+
+#stats h2 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  color: var(--white);
+}
+
+#stats footer {
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: var(--white);
+  background-color: transparent;
+  text-align: center;
+  padding: 1rem 1rem 0.5rem 1rem;
+}
+
+#stats .flex-even {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+#stats .stat-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  border: 1px solid var(--white);
+  border-radius: 0.1rem;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+  padding: 0.5rem 0.2rem;
+}
+
+#stats .name {
+  font-family: "Sora", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-clr);
+
+  padding-bottom: 0.5rem;
+}
+
+#stats .stat {
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 0.25rem 0rem;
+  color: var(--white);
+}
+
+#stats .option {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 0.25rem 0rem 0.25rem 0rem;
+}
+
+#stats .option-name {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8rem;
+  text-align: left;
+}
+
+#stats .option-value {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 8rem;
+  text-align: right;
+}
+
+#stats .option:nth-child(even) > * {
+  color: var(--accent-clr);
+  border-color: var(--accent-clr);
+}
+
+#stats .stat-name {
+  text-align: left;
+}
+
+#stats .stat-value {
+  text-align: right;
+}
+
+#stats .stat:nth-child(even) {
+  color: var(--accent-clr);
+}
+
+#stats .infoboxes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+#stats .infobox {
+  width: 90%;
+  text-align: center;
+}
+
+#stats .infobox > .title {
+  position: relative;
+  left: 50%;
+  top: 0vh;
+  transform: translate(-50%, 0%);
+  background-color: var(--accent-clr);
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: gainsboro;
+
+  width: fit-content;
+  max-width: 80%;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--accent-clr);
+  padding: 0.5rem 1rem;
   z-index: 1;
+}
+
+#stats .infobox > .item {
+  position: relative;
+  left: 50%;
+  top: -1.2rem;
+  transform: translate(-50%, 0%);
+
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: gainsboro;
+
+  border-radius: 0.1rem;
+  border: 1px solid white;
+  padding: 1.5rem 1rem 1rem 1rem;
+  max-width: 20rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+#stats .return-button {
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: gainsboro;
+
+  width: fit-content;
+
+  border-radius: 0.1rem;
+  border: 1px solid var(--white);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0rem;
 }
 
 @keyframes fade-in {

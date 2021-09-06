@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div id="home" class="hidden">
+    <div id="home" class="">
       <div></div>
       <div class="middle">
         <header>
@@ -108,15 +108,18 @@
             ▼
           </div>
         </div>
-
-        <div class="option-box red">
-          <a id="download" download><div class="title">Save</div></a>
-
-          <div id="view-state" class="item">Share</div>
-        </div>
       </div>
 
       <div id="shows-list"></div>
+
+      <div class="btn-row">
+        <div id="data-stats" class="btn" onclick="pages.goto('stats')">
+          Stats
+        </div>
+        <div id="data-save" class="btn red" onclick="pages.goto('save')">
+          Share
+        </div>
+      </div>
 
       <footer>
         This website is not affiliated, authorized or in any way officially
@@ -205,7 +208,7 @@
       </footer>
     </div>
 
-    <div id="save">
+    <div id="save" class="hidden">
       <div class="flex-even">
         <header onclick="pages.goto('home')">
           <h1>Netflix</h1>
@@ -214,23 +217,106 @@
 
         <div class="infoboxes">
           <div class="infobox">
-            <div id="show-name" class="title">Save Options</div>
+            <div id="show-name" class="title">Include</div>
             <div class="item">
-              <div class="stat">
-                <div class="stat-name">Date Started</div>
-                <div id="show-date-started" class="stat-value"></div>
+              <div class="option">
+                <div class="option-name">Date Started</div>
+                <div
+                  id="save-date-started"
+                  class="checkbox"
+                  onclick="watchHistory.toggleSaveState('date-started')"
+                >
+                  ✔
+                </div>
               </div>
-              <div class="stat">
-                <div class="stat-name">Last Watched</div>
-                <div id="show-last-watched" class="stat-value"></div>
+              <div class="option">
+                <div class="option-name">Last Watched</div>
+                <div
+                  id="save-last-watched"
+                  class="checkbox"
+                  onclick="watchHistory.toggleSaveState('last-watched')"
+                >
+                  ✔
+                </div>
               </div>
-              <div class="stat">
-                <div class="stat-name"># Seasons</div>
-                <div id="show-no-seasons" class="stat-value"></div>
+              <div class="option">
+                <div class="option-name"># Seasons</div>
+                <div
+                  id="save-seasons"
+                  class="checkbox"
+                  onclick="watchHistory.toggleSaveState('seasons')"
+                >
+                  ✔
+                </div>
               </div>
-              <div class="stat">
-                <div class="stat-name"># Episodes</div>
-                <div id="show-no-episodes" class="stat-value"></div>
+              <div class="option">
+                <div class="option-name"># Episodes</div>
+                <div
+                  id="save-episodes"
+                  class="checkbox"
+                  onclick="watchHistory.toggleSaveState('episodes')"
+                >
+                  ✔
+                </div>
+              </div>
+              <div class="option">
+                <div class="option-name">Statistics</div>
+                <div
+                  id="save-stats"
+                  class="checkbox"
+                  onclick="watchHistory.toggleSaveState('stats')"
+                >
+                  ✔
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="download-button" onclick="watchHistory.save()">Download</div>
+        <div class="return-button" onclick="pages.goto('data')">
+          Return to List
+        </div>
+      </div>
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="stats" class="hidden">
+      <div class="flex-even">
+        <header onclick="pages.goto('home')">
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="infoboxes">
+          <div class="infobox">
+            <div id="show-name" class="title">Statistics</div>
+            <div class="item">
+              <div class="option">
+                <div class="option-name">Since</div>
+                <div id="stats-since" class="option-value">21/01/2014</div>
+              </div>
+              <div class="option">
+                <div class="option-name">Last Seen</div>
+                <div id="stats-last-seen" class="option-value">10/08/2021</div>
+              </div>
+              <div class="option">
+                <div class="option-name">Films</div>
+                <div id="stats-films" class="option-value">52</div>
+              </div>
+              <div class="option">
+                <div class="option-name">TV Shows</div>
+                <div id="stats-tv-shows" class="option-value">23</div>
+              </div>
+              <div class="option">
+                <div class="option-name">Seasons</div>
+                <div id="stats-seasons" class="option-value">87</div>
+              </div>
+              <div class="option">
+                <div class="option-name">Episodes</div>
+                <div id="stats-episodes" class="option-value">1089</div>
               </div>
             </div>
           </div>

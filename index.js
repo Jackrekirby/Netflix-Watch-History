@@ -23,15 +23,12 @@ class switchList {
 }
 
 class Pages {
-    constructor(pageIds, onLoadFncs) {
+    constructor(pageIds) {
         this.pageIds = pageIds;
-        this.onLoadFncs = onLoadFncs;
         this.currentPageId = pageIds[0];
     }
 
     goto(pageId) {
-        console.log(pageId, this.pageIds.indexOf(pageId));
-        this.onLoadFncs[this.pageIds.indexOf(pageId)]();
         this.hide(this.currentPageId, true);
         this.hide(pageId, false);
         this.currentPageId = pageId;
@@ -49,7 +46,7 @@ class TvShow {
         this.seasons = new Set();
         this.numSeasons = 0;
         this.numEpisodes = 0;
-        this.startDate = 0;
+        this.startDate = '';
         this.lastWatched = date;
         this.lastIndex = index;
     }
@@ -71,6 +68,34 @@ class WatchHistory {
             'A-Z', '# Seasons', '# Episodes']);
         this.sortDirection = new switchList('sort-direction-state', ['▼', '▲']);
         this.shows = new Map();
+
+        this.saveStates = {
+            'last-watched': true, 'date-started': true,
+            'seasons': true, 'episodes': true, 'stats': true,
+        };
+
+        this.showStates = {
+            'Last Viewed': true, 'Date Started': true,
+            '# Seasons': true, '# Episodes': true
+        };
+
+        this.since = 0;
+        this.lastSeen = 0;
+        this.numFilms = 0;
+        this.numTvShows = 0;
+        this.numSeasons = 0;
+        this.numEpisodes = 0;
+    }
+
+    toggleSaveState(option) {
+        let element = document.getElementById('save-' + option);
+        if (this.saveStates[option]) {
+            this.saveStates[option] = false;
+            element.classList.add('off');
+        } else {
+            this.saveStates[option] = true;
+            element.classList.remove('off');
+        }
     }
 
     switchOption(option) {
@@ -172,34 +197,59 @@ class WatchHistory {
             item.classList.add('item');
             let itemName = document.createElement('div');
             itemName.classList.add('name');
+
             itemName.innerHTML = show.name;
             itemName.addEventListener("click", () => { this.loadShow(show) });
             let itemValue = document.createElement('div');
+
             itemValue.classList.add('value');
 
-            switch (this.sorts.current()) {
-                case '# Seasons':
-                    itemValue.innerHTML = show.numSeasons;
-                    break;
-                case '# Episodes':
-                    itemValue.innerHTML = show.numEpisodes;
-                    break;
-                case 'Date Started':
-                    itemValue.innerHTML = show.startDate;
-                    break;
-                case 'Last Viewed':
-                    itemValue.innerHTML = show.lastWatched;
-                    break;
+            if (this.showStates[this.sorts.current()]) {
+                switch (this.sorts.current()) {
+                    case '# Seasons':
+                        itemValue.innerHTML = show.numSeasons;
+                        break;
+                    case '# Episodes':
+                        itemValue.innerHTML = show.numEpisodes;
+                        break;
+                    case 'Date Started':
+                        itemValue.innerHTML = show.startDate;
+                        break;
+                    case 'Last Viewed':
+                        itemValue.innerHTML = show.lastWatched;
+                        break;
+                }
             }
+
 
             item.appendChild(itemName);
             item.appendChild(itemValue);
             list.appendChild(item);
         }
+
+        // render stats
+
+        document.getElementById('stats-since').innerHTML = this.since;
+        document.getElementById('stats-last-seen').innerHTML = this.lastSeen;
+        document.getElementById('stats-films').innerHTML = this.numFilms;
+        document.getElementById('stats-tv-shows').innerHTML = this.numTvShows;
+        document.getElementById('stats-seasons').innerHTML = this.numSeasons;
+        document.getElementById('stats-episodes').innerHTML = this.numEpisodes;
     }
 
     save() {
-        let csv = "Show, Last Watched, Date Started, # Seasons, # Episodes \n";
+        function includeMark(state) {
+            return state ? '' : '*';
+        }
+
+        let csv = ['Show',
+            'Last Watched' + includeMark(this.saveStates['last-watched']),
+            'Date Started' + includeMark(this.saveStates['date-started']), 'Start Index',
+            '# Seasons' + includeMark(this.saveStates['seasons']),
+            '# Episodes' + includeMark(this.saveStates['episodes'])
+        ].join(',') + '\n';
+
+        "Show, Last Watched, Date Started, Start Index, # Seasons, # Episodes \n";
         let shows = Array.from(this.shows.values());
         console.log(this);
 
@@ -209,17 +259,26 @@ class WatchHistory {
 
         let lastIndex = 0;
         for (let show of shows) {
-            csv += [show.name, lastIndex, showsStarted.indexOf(show),
-            showsSeasons.indexOf(show), showsEpisodes.indexOf(show)].join(', ') + '\n';
+            let lastWatched = this.saveStates['last-watched'] ? show.lastWatched : lastIndex;
+            let dateStarted = this.saveStates['date-started'] ? show.startDate : '';
+            let startIndex = showsStarted.indexOf(show);
+            let numSeasons = this.saveStates['seasons'] ? show.numSeasons : showsSeasons.indexOf(show);
+            let numEpisodes = this.saveStates['episodes'] ? show.numEpisodes : showsEpisodes.indexOf(show);
+
+            csv += [show.name, lastWatched, dateStarted, startIndex, numSeasons, numEpisodes].join(', ') + '\n';
             lastIndex++;
-            // csv += [show.name, show.lastWatched, show.startDate,
-            // show.numSeasons, show.numEpisodes].join(', ') + '\n';
+        }
+
+        if (this.saveStates['stats']) {
+            csv += '\n' + [this.since, this.lastSeen, this.numFilms, this.numTvShows,
+            this.numSeasons, this.numEpisodes];
         }
 
         let myFile = new File([csv], "NetflixWatchHistory.csv", { type: "text/plain;charset=utf-8" });
-        let download = document.getElementById('download');
+        let download = document.createElement('a');
         download.download = 'NetflixWatchHistory.csv';
         download.href = window.URL.createObjectURL(myFile);
+        download.click();
     }
 
     loadShow(show) {
@@ -251,6 +310,7 @@ class WatchHistory {
 }
 
 function upload() {
+    watchHistory = new WatchHistory();
     const reader = new FileReader()
     reader.onload = function (e) {
         function isSeason(titleParts) {
@@ -266,42 +326,98 @@ function upload() {
             return -1;
         }
 
-        console.log('reading');
         let lines = this.result.split('\n');
-        let index = 0;
-        for (let line of lines) {
-            if (line == '' || line.startsWith('Title')) { continue; }
-            let lineParts = line.split(',');
-            let title = lineParts.slice(0, lineParts.length - 1).join(',');
-            let date = lineParts[lineParts.length - 1];
-            // console.log(date);
-            date = date.substring(1, date.length - 1);
-            date = date.substring(0, 6) + date.substring(8, 10);
-            // console.log(date);
+        if (lines[0].startsWith('Title')) {
+            let index = 0;
+            for (let line of lines) {
+                if (index == 0 || line == '') { index++; continue; }
+                let lineParts = line.split(',');
+                let title = lineParts.slice(0, lineParts.length - 1).join(',');
+                let date = lineParts[lineParts.length - 1];
+                // console.log(date);
+                date = date.substring(1, date.length - 1);
+                date = date.substring(0, 6) + date.substring(8, 10);
+                // console.log(date);
 
-            // date = date.split('/');
-            // [date[0], date[1]] = [date[1], date[0]];
-            // date = new Date(date.join('/'));
+                // date = date.split('/');
+                // [date[0], date[1]] = [date[1], date[0]];
+                // date = new Date(date.join('/'));
 
-            let titleParts = title.split(': ');
-            for (let i in titleParts) {
-                titleParts[i] = titleParts[i].replace('"', '');
-            }
-
-            let seasonIndex = isSeason(titleParts);
-            if (seasonIndex >= 0) {
-                let showName = titleParts.slice(0, seasonIndex).join(': ');
-                let show = new TvShow(showName, date);
-                if (!watchHistory.shows.has(showName)) {
-                    watchHistory.shows.set(showName, show, index);
+                let titleParts = title.split(': ');
+                for (let i in titleParts) {
+                    titleParts[i] = titleParts[i].replace('"', '');
                 }
-                watchHistory.shows.get(showName).update(titleParts[seasonIndex], date, index);
-            }
-            index++;
-        }
-        watchHistory.render();
-        watchHistory.save();
 
+                let seasonIndex = isSeason(titleParts);
+                if (seasonIndex >= 0) {
+                    let showName = titleParts.slice(0, seasonIndex).join(': ');
+                    let show = new TvShow(showName, date, index);
+                    if (!watchHistory.shows.has(showName)) {
+                        watchHistory.shows.set(showName, show);
+                    }
+                    watchHistory.shows.get(showName).update(titleParts[seasonIndex], date, index);
+                }
+
+                if (index == 1) {
+                    watchHistory.lastSeen = date;
+                }
+                if (index == lines.length - 2) {
+                    watchHistory.since = date;
+                }
+
+                index++;
+            }
+
+            let shows = Array.from(watchHistory.shows.values());
+            for (show of shows) {
+                watchHistory.numEpisodes += show.numEpisodes;
+                watchHistory.numSeasons += show.numSeasons;
+            }
+            watchHistory.numTvShows = shows.length;
+            watchHistory.numFilms = 0;
+        } else if (lines[0].startsWith('Show')) {
+            let lastIndex = 0;
+
+            let [title, lastWatched, dateStarted, startIndex, numSeasons,
+                numEpisodes] = lines[0].split(',');
+
+            watchHistory.showStates = {
+                'Last Viewed': !lastWatched.endsWith('*'),
+                'Date Started': !dateStarted.endsWith('*'),
+                '# Seasons': !numSeasons.endsWith('*'),
+                '# Episodes': !numEpisodes.endsWith('*')
+            };
+
+            for (let line of lines) {
+                if (lastIndex == 0) { lastIndex++; continue; }
+                if (line == '') { break; }
+                let [title, lastWatched, dateStarted, startIndex, numSeasons,
+                    numEpisodes] = line.split(',');
+
+                let show = new TvShow(title, lastWatched, lastIndex);
+                show.numSeasons = parseInt(numSeasons);
+                show.numEpisodes = parseInt(numEpisodes);
+                show.startDate = dateStarted;
+                show.startIndex = startIndex;
+                show.lastIndex = lastIndex;
+
+                watchHistory.shows.set(title, show);
+
+                lastIndex++;
+            }
+            if (lines[lines.length - 1] != '') {
+                [watchHistory.since, watchHistory.lastSeen, watchHistory.numFilms, watchHistory.numTvShows, watchHistory.numSeasons,
+                watchHistory.numEpisodes] = lines[lines.length - 1].split(',');
+            } else {
+                document.getElementById('data-stats').classList.add('hidden');
+            }
+            document.getElementById('data-save').classList.add('hidden');
+
+        } else {
+
+        }
+
+        watchHistory.render();
     };
 
     reader.readAsText(this.files[0]);
@@ -310,8 +426,7 @@ function upload() {
 }
 
 document.getElementById("file-upload").addEventListener('change', upload, false);
-let pages = new Pages(['home', 'help', 'data', 'show'],
-    [() => { }, () => { }, () => { }, () => { }]);
-let watchHistory = new WatchHistory();;
+let pages = new Pages(['home', 'help', 'data', 'show', 'stats']);
+let watchHistory = new WatchHistory();
 
 
