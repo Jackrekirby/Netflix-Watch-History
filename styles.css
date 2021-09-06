@@ -833,6 +833,10 @@ body {
   border-radius: 0.1rem;
   border: 1px solid var(--white);
   background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #save .option:nth-child(even) > * {
@@ -840,8 +844,24 @@ body {
   border-color: var(--accent-clr);
 }
 
-#save .checkbox.off {
-  color: transparent;
+#save .checkbox.off > * {
+  display: none;
+}
+
+#save .tick {
+  --length: 0.5rem;
+  width: var(--length);
+  height: var(--length);
+  margin: 0px;
+  padding: 0px;
+  background-color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 0.1rem;
+}
+
+#save .option:nth-child(even) > * > * {
+  border-color: var(--accent-clr);
+  background-color: var(--accent-clr);
 }
 
 #save .stat-name {

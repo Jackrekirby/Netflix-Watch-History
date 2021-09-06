@@ -3,6 +3,12 @@ class switchList {
         this.element = document.getElementById(elementId);
         this.items = items;
         this.index = 0;
+        this.update();
+    }
+
+    reset() {
+        this.index = 0;
+        this.update();
     }
 
     current() {
@@ -17,8 +23,11 @@ class switchList {
     next() {
         this.index++;
         this.index %= this.items.length;
-        let state = this.items[this.index];
-        this.element.innerHTML = state;
+        this.update();
+    }
+
+    update() {
+        this.element.innerHTML = this.current();
     }
 }
 
@@ -62,10 +71,13 @@ class TvShow {
 
 class WatchHistory {
     constructor() {
-        console.log(document.body);
         this.views = new switchList('view-state', ['TV Shows', 'Films']);
+        this.sortsFilms = new switchList('sort-state', ['Date', 'A-Z']);
         this.sorts = new switchList('sort-state', ['Last Viewed', 'Date Started',
             'A-Z', '# Seasons', '# Episodes']);
+
+
+
         this.sortDirection = new switchList('sort-direction-state', ['▼', '▲']);
         this.shows = new Map();
         this.films = new Map();
@@ -98,31 +110,48 @@ class WatchHistory {
             element.classList.remove('off');
         }
     }
-
     switchOption(option) {
         switch (option) {
             case 'view':
                 this.views.next();
+                if (this.views.current() == 'Films') {
+                    this.sortsFilms.reset();
+                } else {
+                    this.sorts.reset();
+                }
                 break;
             case 'sort by':
-                this.sorts.next();
-                switch (this.sorts.current()) {
-                    case '# Seasons':
-                        this.sortDirection.set('▲');
-                        break;
-                    case '# Episodes':
-                        this.sortDirection.set('▲');
-                        break;
-                    case 'A-Z':
-                        this.sortDirection.set('▼');
-                        break;
-                    case 'Date Started':
-                        this.sortDirection.set('▼');
-                        break;
-                    case 'Last Viewed':
-                        this.sortDirection.set('▼');
-                        break;
+                if (this.views.current() == 'Films') {
+                    this.sortsFilms.next();
+                    switch (this.sortsFilms.current()) {
+                        case 'Date':
+                            this.sortDirection.set('▼');
+                            break;
+                        case 'A-Z':
+                            this.sortDirection.set('▼');
+                            break;
+                    }
+                } else {
+                    this.sorts.next();
+                    switch (this.sorts.current()) {
+                        case '# Seasons':
+                            this.sortDirection.set('▲');
+                            break;
+                        case '# Episodes':
+                            this.sortDirection.set('▲');
+                            break;
+                        case 'A-Z':
+                            this.sortDirection.set('▼');
+                            break;
+                        case 'Date Started':
+                            this.sortDirection.set('▼');
+                            break;
+                        case 'Last Viewed':
+                            this.sortDirection.set('▼');
+                            break;
+                    }
                 }
+
                 break;
             case 'sort direction':
                 this.sortDirection.next();
@@ -158,7 +187,7 @@ class WatchHistory {
                 break;
             case 'A-Z':
                 shows.sort(function (a, b) {
-                    sortAZ(a, b);
+                    return sortAZ(a, b);
                 })
                 break;
             case 'Date Started':
@@ -170,7 +199,7 @@ class WatchHistory {
                 break;
             case 'Last Viewed':
                 shows.sort(function (a, b) {
-                    sortLastViewed(a, b);
+                    return sortLastViewed(a, b);
                 })
                 break;
         }
@@ -178,56 +207,94 @@ class WatchHistory {
     }
 
     render() {
+        function sortFilmsAZ(a, b) {
+            let [aName, aDate] = a;
+            let [bName, bDate] = b;
+
+            if (aName.toLowerCase() < bName.toLowerCase()) { return -1; }
+            if (aName.toLowerCase() > bName.toLowerCase()) { return 1; }
+            return 0;
+        }
+
         let list = document.getElementById('shows-list');
 
         while (list.firstChild) {
             list.removeChild(list.lastChild);
         }
 
+        if (this.views.current() == 'Films') {
 
-        let shows = Array.from(this.shows.values());
-        this.sortShowsBy(this.sorts.current(), shows);
+            let films = [...this.films.entries()];
 
-        if (this.sortDirection.current() == '▲') {
-            shows = shows.reverse();
-        }
+            if (this.sortDirection.current() == '▲') {
+                films = films.reverse();
+            }
 
-
-        for (let show of shows) {
-            let item = document.createElement('div');
-            item.classList.add('item');
-            let itemName = document.createElement('div');
-            itemName.classList.add('name');
-
-            itemName.innerHTML = show.name;
-            itemName.addEventListener("click", () => { this.loadShow(show) });
-            let itemValue = document.createElement('div');
-
-            itemValue.classList.add('value');
-
-            if (this.showStates[this.sorts.current()]) {
-                switch (this.sorts.current()) {
-                    case '# Seasons':
-                        itemValue.innerHTML = show.numSeasons;
-                        break;
-                    case '# Episodes':
-                        itemValue.innerHTML = show.numEpisodes;
-                        break;
-                    case 'Date Started':
-                        itemValue.innerHTML = show.startDate;
-                        break;
-                    case 'Last Viewed':
-                        itemValue.innerHTML = show.lastWatched;
-                        break;
-                }
+            if (this.sortsFilms.current() == 'A-Z') {
+                films.sort(sortFilmsAZ);
             }
 
 
-            item.appendChild(itemName);
-            item.appendChild(itemValue);
-            list.appendChild(item);
-        }
+            for (let [film, date] of films) {
+                let item = document.createElement('div');
+                item.classList.add('item');
+                let itemName = document.createElement('div');
+                itemName.classList.add('name');
+                itemName.innerHTML = film;
+                let itemValue = document.createElement('div');
 
+                itemValue.classList.add('value');
+                itemValue.innerHTML = date;
+
+                item.appendChild(itemName);
+                item.appendChild(itemValue);
+                list.appendChild(item);
+            }
+        } else {
+
+            let shows = Array.from(this.shows.values());
+            this.sortShowsBy(this.sorts.current(), shows);
+
+            if (this.sortDirection.current() == '▲') {
+                shows = shows.reverse();
+            }
+
+
+            for (let show of shows) {
+                let item = document.createElement('div');
+                item.classList.add('item');
+                let itemName = document.createElement('div');
+                itemName.classList.add('name');
+
+                itemName.innerHTML = show.name;
+                itemName.addEventListener("click", () => { this.loadShow(show) });
+                let itemValue = document.createElement('div');
+
+                itemValue.classList.add('value');
+
+                if (this.showStates[this.sorts.current()]) {
+                    switch (this.sorts.current()) {
+                        case '# Seasons':
+                            itemValue.innerHTML = show.numSeasons;
+                            break;
+                        case '# Episodes':
+                            itemValue.innerHTML = show.numEpisodes;
+                            break;
+                        case 'Date Started':
+                            itemValue.innerHTML = show.startDate;
+                            break;
+                        case 'Last Viewed':
+                            itemValue.innerHTML = show.lastWatched;
+                            break;
+                    }
+                }
+
+
+                item.appendChild(itemName);
+                item.appendChild(itemValue);
+                list.appendChild(item);
+            }
+        }
         // render stats
 
         document.getElementById('stats-since').innerHTML = this.since;
@@ -236,6 +303,7 @@ class WatchHistory {
         document.getElementById('stats-tv-shows').innerHTML = this.numTvShows;
         document.getElementById('stats-seasons').innerHTML = this.numSeasons;
         document.getElementById('stats-episodes').innerHTML = this.numEpisodes;
+
     }
 
     save() {
@@ -378,7 +446,7 @@ function upload() {
                 watchHistory.numSeasons += show.numSeasons;
             }
             watchHistory.numTvShows = shows.length;
-            watchHistory.numFilms = 0;
+            watchHistory.numFilms = watchHistory.films.size;
         } else if (lines[0].startsWith('Show')) {
             let lastIndex = 0;
 
@@ -420,8 +488,6 @@ function upload() {
         } else {
 
         }
-
-        console.log(watchHistory.films);
         watchHistory.render();
     };
 
