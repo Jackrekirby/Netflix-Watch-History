@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="styles.css" />
     <title>Netflix Watch History</title>
   </head>
+
   <body>
-    <div id="home">
+    <div id="home" class="hidden">
       <div></div>
       <div class="middle">
         <header>
@@ -107,10 +108,137 @@
             ▼
           </div>
         </div>
+
+        <div class="option-box red">
+          <a id="download" download><div class="title">Save</div></a>
+
+          <div id="view-state" class="item">Share</div>
+        </div>
       </div>
 
       <div id="shows-list"></div>
 
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="show" class="hidden">
+      <div class="flex-even">
+        <header onclick="pages.goto('home')">
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="infoboxes">
+          <div class="infobox">
+            <div id="show-name" class="title">TV Show</div>
+            <div class="item">
+              <div class="stat">
+                <div class="stat-name">Date Started</div>
+                <div id="show-date-started" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name">Last Watched</div>
+                <div id="show-last-watched" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name"># Seasons</div>
+                <div id="show-no-seasons" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name"># Episodes</div>
+                <div id="show-no-episodes" class="stat-value"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="infobox" class="hidden">
+            <div class="title">Search On</div>
+            <div class="item">
+              <div class="icon-row">
+                <a
+                  id="show-netflix-link"
+                  href="https://www.netflix.com/search?q=The%20Big%20Bang%20Theory"
+                  target="_blank"
+                >
+                  <img src="res/netflix.svg" class="icon" alt="Netflix Icon" />
+                </a>
+                <a
+                  id="show-google-link"
+                  href="https://www.google.com/search?q=the+big+bang+theory+tv+show"
+                  target="_blank"
+                >
+                  <img src="res/google.svg" class="icon" alt="Google Icon" />
+                </a>
+                <a
+                  id="show-rotten-tomatoes-link"
+                  href="https://www.rottentomatoes.com/search?search=The%20big%20bang%20theory"
+                  target="_blank"
+                >
+                  <img
+                    src="res/rotten_tomatoes.png"
+                    class="icon"
+                    alt="Rotten Tomatoes Icon"
+                  />
+                </a>
+
+                <a
+                  id="show-imdb-link"
+                  href="https://www.imdb.com/find?s=tt&q=The+big+bang+theory"
+                  target="_blank"
+                >
+                  <img src="res/imdb.svg" class="icon" alt="IMDB Icon" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="return-button" onclick="pages.goto('data')">
+          Return to List
+        </div>
+      </div>
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="save">
+      <div class="flex-even">
+        <header onclick="pages.goto('home')">
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="infoboxes">
+          <div class="infobox">
+            <div id="show-name" class="title">Save Options</div>
+            <div class="item">
+              <div class="stat">
+                <div class="stat-name">Date Started</div>
+                <div id="show-date-started" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name">Last Watched</div>
+                <div id="show-last-watched" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name"># Seasons</div>
+                <div id="show-no-seasons" class="stat-value"></div>
+              </div>
+              <div class="stat">
+                <div class="stat-name"># Episodes</div>
+                <div id="show-no-episodes" class="stat-value"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="return-button" onclick="pages.goto('data')">
+          Return to List
+        </div>
+      </div>
       <footer>
         This website is not affiliated, authorized or in any way officially
         connected with Netflix.
