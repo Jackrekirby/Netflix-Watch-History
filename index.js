@@ -68,6 +68,7 @@ class WatchHistory {
             'A-Z', '# Seasons', '# Episodes']);
         this.sortDirection = new switchList('sort-direction-state', ['▼', '▲']);
         this.shows = new Map();
+        this.films = new Map();
 
         this.saveStates = {
             'last-watched': true, 'date-started': true,
@@ -318,6 +319,8 @@ function upload() {
             for (let part of titleParts) {
                 if (part.startsWith('Season') ||
                     part.startsWith('Vol.') ||
+                    part.startsWith('Series') ||
+                    part.startsWith('Limited Series') ||
                     part.startsWith('Part')) {
                     return i;
                 }
@@ -356,13 +359,14 @@ function upload() {
                         watchHistory.shows.set(showName, show);
                     }
                     watchHistory.shows.get(showName).update(titleParts[seasonIndex], date, index);
-                }
-
-                if (index == 1) {
-                    watchHistory.lastSeen = date;
-                }
-                if (index == lines.length - 2) {
-                    watchHistory.since = date;
+                    if (index == 1) {
+                        watchHistory.lastSeen = date;
+                    }
+                    if (index == lines.length - 2) {
+                        watchHistory.since = date;
+                    }
+                } else {
+                    watchHistory.films.set(title.substring(1, title.length - 1), date);
                 }
 
                 index++;
@@ -417,6 +421,7 @@ function upload() {
 
         }
 
+        console.log(watchHistory.films);
         watchHistory.render();
     };
 
