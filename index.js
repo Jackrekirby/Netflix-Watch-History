@@ -241,6 +241,7 @@ class WatchHistory {
                 let itemName = document.createElement('div');
                 itemName.classList.add('name');
                 itemName.innerHTML = film;
+                itemName.addEventListener("click", () => { this.loadFilm(film, date) });
                 let itemValue = document.createElement('div');
 
                 itemValue.classList.add('value');
@@ -338,10 +339,17 @@ class WatchHistory {
             lastIndex++;
         }
 
+        csv += 'Film, Date\n'
+        for (let [film, date] of this.films) {
+            csv += [film, date].join(', ') + '\n';
+        }
+
         if (this.saveStates['stats']) {
             csv += '\n' + [this.since, this.lastSeen, this.numFilms, this.numTvShows,
-            this.numSeasons, this.numEpisodes];
+            this.numSeasons, this.numEpisodes].join(', ');
         }
+
+
 
         let myFile = new File([csv], "NetflixWatchHistory.csv", { type: "text/plain;charset=utf-8" });
         let download = document.createElement('a');
@@ -371,10 +379,28 @@ class WatchHistory {
             "https://www.imdb.com/find?&q=" + qplus +
             "&s=tt&ttype=tv&ref_=fn_tv";
 
-        //https://www.imdb.com/find?s=tt&q=sweet+tooth&s=tt&ttype=tv&exact=true&ref_=fn_tt_ex
-        //https://www.imdb.com/find?q=sweet%20tooth&s=tt&ttype=tv&exact=true&ref_=fn_tt_ex
-
         pages.goto('show');
+    }
+
+    loadFilm(film, date) {
+        document.getElementById('film-name').innerHTML = film;
+        document.getElementById('film-date').innerHTML = date;
+
+        let filmLowCase = film.toLowerCase();
+        let q20 = filmLowCase.replace(' ', '%20');
+        let qplus = filmLowCase.replace(' ', '+');
+
+        document.getElementById('film-netflix-link').href =
+            "https://www.netflix.com/search?q=" + q20;
+        document.getElementById('film-google-link').href =
+            "https://www.google.com/search?q=" + qplus + '+film';
+        document.getElementById('film-rotten-tomatoes-link').href =
+            "https://www.rottentomatoes.com/search?search=" + q20;
+        document.getElementById('film-imdb-link').href =
+            "https://www.imdb.com/find?&q=" + qplus +
+            "&s=tt&ttype=ft&ref_=fn_ft";
+
+        pages.goto('film');
     }
 }
 
@@ -434,7 +460,10 @@ function upload() {
                         watchHistory.since = date;
                     }
                 } else {
-                    watchHistory.films.set(title.substring(1, title.length - 1), date);
+                    title = title.substring(1, title.length - 1);
+                    if (title != " " && title != " : Episode 1") {
+                        watchHistory.films.set(title, date);
+                    }
                 }
 
                 index++;
@@ -460,21 +489,33 @@ function upload() {
                 '# Episodes': !numEpisodes.endsWith('*')
             };
 
+            let mode = 'Show';
             for (let line of lines) {
                 if (lastIndex == 0) { lastIndex++; continue; }
                 if (line == '') { break; }
-                let [title, lastWatched, dateStarted, startIndex, numSeasons,
-                    numEpisodes] = line.split(',');
+                if (line == 'Film, Date') {
+                    mode = 'Film';
+                    lastIndex++;
+                    continue;
+                }
 
-                let show = new TvShow(title, lastWatched, lastIndex);
-                show.numSeasons = parseInt(numSeasons);
-                show.numEpisodes = parseInt(numEpisodes);
-                show.startDate = dateStarted;
-                show.startIndex = startIndex;
-                show.lastIndex = lastIndex;
 
-                watchHistory.shows.set(title, show);
+                if (mode == 'Show') {
+                    let [title, lastWatched, dateStarted, startIndex, numSeasons,
+                        numEpisodes] = line.split(',');
 
+                    let show = new TvShow(title, lastWatched, lastIndex);
+                    show.numSeasons = parseInt(numSeasons);
+                    show.numEpisodes = parseInt(numEpisodes);
+                    show.startDate = dateStarted;
+                    show.startIndex = startIndex;
+                    show.lastIndex = lastIndex;
+
+                    watchHistory.shows.set(title, show);
+                } else { // mode == 'Film'
+                    let [film, date] = line.split(',');
+                    watchHistory.films.set(film, date);
+                }
                 lastIndex++;
             }
             if (lines[lines.length - 1] != '') {
@@ -497,7 +538,7 @@ function upload() {
 }
 
 document.getElementById("file-upload").addEventListener('change', upload, false);
-let pages = new Pages(['home', 'help', 'data', 'show', 'stats']);
+let pages = new Pages(['home', 'help', 'data', 'show', 'stats', 'film']);
 let watchHistory = new WatchHistory();
 
 
