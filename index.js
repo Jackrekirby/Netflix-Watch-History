@@ -151,7 +151,6 @@ class WatchHistory {
                             break;
                     }
                 }
-
                 break;
             case 'sort direction':
                 this.sortDirection.next();
@@ -226,14 +225,13 @@ class WatchHistory {
 
             let films = [...this.films.entries()];
 
-            if (this.sortDirection.current() == '▲') {
-                films = films.reverse();
-            }
-
             if (this.sortsFilms.current() == 'A-Z') {
                 films.sort(sortFilmsAZ);
             }
 
+            if (this.sortDirection.current() == '▲') {
+                films = films.reverse();
+            }
 
             for (let [film, date] of films) {
                 let item = document.createElement('div');
@@ -245,7 +243,10 @@ class WatchHistory {
                 let itemValue = document.createElement('div');
 
                 itemValue.classList.add('value');
-                itemValue.innerHTML = date;
+                if (this.sortsFilms.current() == 'Date') {
+                    itemValue.innerHTML = date;
+                }
+
 
                 item.appendChild(itemName);
                 item.appendChild(itemValue);

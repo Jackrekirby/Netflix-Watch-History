@@ -127,7 +127,7 @@
       </footer>
     </div>
 
-    <div id="show" class="hidden">
+    <div id="show" class="hidden filmshow">
       <div class="flex-even">
         <header onclick="pages.goto('home')">
           <h1>Netflix</h1>
@@ -163,21 +163,21 @@
               <div class="icon-row">
                 <a
                   id="show-netflix-link"
-                  href="https://www.netflix.com/search?q=The%20Big%20Bang%20Theory"
+                  href="https://www.netflix.com/"
                   target="_blank"
                 >
                   <img src="res/netflix.svg" class="icon" alt="Netflix Icon" />
                 </a>
                 <a
                   id="show-google-link"
-                  href="https://www.google.com/search?q=the+big+bang+theory+tv+show"
+                  href="https://www.google.com/"
                   target="_blank"
                 >
                   <img src="res/google.svg" class="icon" alt="Google Icon" />
                 </a>
                 <a
                   id="show-rotten-tomatoes-link"
-                  href="https://www.rottentomatoes.com/search?search=The%20big%20bang%20theory"
+                  href="https://www.rottentomatoes.com/"
                   target="_blank"
                 >
                   <img
@@ -189,7 +189,76 @@
 
                 <a
                   id="show-imdb-link"
-                  href="https://www.imdb.com/find?s=tt&q=The+big+bang+theory"
+                  href="https://www.imdb.com/"
+                  target="_blank"
+                >
+                  <img src="res/imdb.svg" class="icon" alt="IMDB Icon" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="return-button" onclick="pages.goto('data')">
+          Return to List
+        </div>
+      </div>
+      <footer>
+        This website is not affiliated, authorized or in any way officially
+        connected with Netflix.
+      </footer>
+    </div>
+
+    <div id="film" class="hidden filmshow">
+      <div class="flex-even">
+        <header onclick="pages.goto('home')">
+          <h1>Netflix</h1>
+          <h2>watch history</h2>
+        </header>
+
+        <div class="infoboxes">
+          <div class="infobox">
+            <div id="film-name" class="title">TV Show</div>
+            <div class="item">
+              <div class="stat">
+                <div class="stat-name">Date</div>
+                <div id="film-date" class="stat-value"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="infobox" class="hidden">
+            <div class="title">Search On</div>
+            <div class="item">
+              <div class="icon-row">
+                <a
+                  id="film-netflix-link"
+                  href="https://www.netflix.com/"
+                  target="_blank"
+                >
+                  <img src="res/netflix.svg" class="icon" alt="Netflix Icon" />
+                </a>
+                <a
+                  id="film-google-link"
+                  href="https://www.google.com/"
+                  target="_blank"
+                >
+                  <img src="res/google.svg" class="icon" alt="Google Icon" />
+                </a>
+                <a
+                  id="film-rotten-tomatoes-link"
+                  href="https://www.rottentomatoes.com/"
+                  target="_blank"
+                >
+                  <img
+                    src="res/rotten_tomatoes.png"
+                    class="icon"
+                    alt="Rotten Tomatoes Icon"
+                  />
+                </a>
+
+                <a
+                  id="film-imdb-link"
+                  href="https://www.imdb.com/"
                   target="_blank"
                 >
                   <img src="res/imdb.svg" class="icon" alt="IMDB Icon" />
